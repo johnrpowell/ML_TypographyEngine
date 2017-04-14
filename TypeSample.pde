@@ -4,6 +4,9 @@ class TypeSample {
   PFont roboto, merriweather, garamond, jungka;
   String[] fL = PFont.list();
   int[] fontIndices = new int[4];
+  String[] allCopy = new String[3];
+  int[] allSizes = new int[3];
+  int[] allLeading = new int[3];
   
   TypeSample() {
     
@@ -20,27 +23,43 @@ class TypeSample {
     }
   }
   
-  void renderText(String[] s, int f, int x, int y, int[] z) {
-    int fX = x;
-    int fY = y;
-    int[] fZ = z;
-    int fF = f;
-    String[] fS = s;
-    
+  void renderText(int f, int x, int y) {
+    int posX = x;
+    int posY = y;
+    int font = f;
+    int textFrameW = 200;
+    int textFrameH = 200;
     fill(0);
     
-    for (int i = 0; i < fS.length; i++) {
-      textFont(createFont(fL[fontIndices[fF]], fZ[i], true));
-      textSize(fZ[i]);
-      text(fS[i], fX, fY + i*20);
+    for (int i = 0; i < allCopy.length; i++) {
+      
+      font = (int) random(3);
+      
+      textFont(createFont(fL[fontIndices[font]], allSizes[i], true));
+      textSize(allSizes[i]);
+      
+      if (i == 2) text(allCopy[i], posX, posY + i*20, textFrameW, textFrameH);
+      else text(allCopy[i], posX, posY + i*20);
+      
     }
   }
   
-  void setupFonts() {
-    roboto = createFont(fL[fontIndices[0]], 100, true);
-    merriweather = createFont(fL[fontIndices[1]], 100, true);
-    garamond = createFont(fL[fontIndices[2]], 100, true);
-    jungka = createFont(fL[fontIndices[3]], 100, true);
+  void setCopy(String t, String s, String b) {
+    allCopy[0] = t;    // set title
+    allCopy[1] = s;    // set subtitle
+    allCopy[2] = b;    // set body copy
+  }
+  
+  void setSizes(int sT, int sS, int sB) {
+    allSizes[0] = sT;    // set title size
+    allSizes[1] = sS;    // set subtitle size
+    allSizes[2] = sB;    // set body copy size
+  }
+  
+  void setLeading(int lT, int lS, int lB) {
+    allLeading[0] = lT;    // set title leading
+    allLeading[1] = lS;    // set subtitle leading
+    allLeading[2] = lB;    // set body copy leading
   }
   
 }
